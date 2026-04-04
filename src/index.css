@@ -1,0 +1,225 @@
+/* ===== Zorvyn DESIGN SYSTEM ===== */
+/* Aesthetic: Refined Editorial Finance — warm slate neutrals, amber accents */
+/* Inspired by: Bloomberg, Stripe Dashboard, Linear */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mada:wght@200..900&display=swap');
+
+:root {
+  /* Light Theme */
+  --bg-base: #F7F6F3;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --bg-subtle: #F0EFE9;
+  --bg-sidebar: #fbfdfb;
+
+  --text-primary: #1A1917;
+  --text-secondary: #6B6860;
+  --text-tertiary: #9C9A94;
+  --text-inverse: #F7F6F3;
+  --text-sidebar: #D4D2CB;
+
+  --border-default: #E5E3DC;
+  --border-subtle: #EEEDE8;
+  --border-strong: #C9C7BF;
+
+  --accent-primary: #0c1110;       /* Warm amber */
+  --accent-primary-hover: black;
+  --accent-primary-bg: #FDF3E7;
+  --accent-secondary: #2D6A4F;     /* Forest green */
+  --accent-secondary-bg: #EEF5F1;
+
+  --income-color: #2D6A4F;
+  --income-bg: #EEF5F1;
+  --expense-color: #C0392B;
+  --expense-bg: #f8e0e1;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.05);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  --sidebar-width: 200px;
+  --header-height: 64px;
+
+  --font-sans: "Mada", sans-serif;
+  --font-mono: "Fira Sans", sans-serif;
+
+  --transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg-base: #111110;
+  --bg-surface: #1C1C1A;
+  --bg-elevated: #252522;
+  --bg-subtle: #1C1C1A;
+  --bg-sidebar: #0D0D0C;
+
+  --text-primary: #EDECE8;
+  --text-secondary: #A8A69F;
+  --text-tertiary: #6E6C67;
+  --text-inverse: #F7F6F3;
+  --text-sidebar: #D4D2CB;
+
+  --border-default: #2E2D2A;
+  --border-subtle: #252522;
+  --border-strong: #403E3A;
+
+  --accent-primary: #0c1110;
+  --accent-primary-hover: #0c1110;
+  --accent-primary-bg: white;
+
+  --accent-secondary: #3D8A65;
+  --accent-secondary-bg: #192820;
+
+  --income-color: #4CAF82;
+  --income-bg: #142419;
+  --expense-color: #E05C4A;
+  --expense-bg: #2A1410;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.5);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+
+/* Typography Scale */
+.text-xs { font-size: 11px; line-height: 16px; }
+.text-sm { font-size: 12px; line-height: 18px; }
+.text-base { font-size: 14px; line-height: 20px; }
+.text-lg { font-size: 16px; line-height: 24px; }
+.text-xl { font-size: 18px; line-height: 28px; }
+.text-2xl { font-size: 22px; line-height: 30px; }
+.text-3xl { font-size: 28px; line-height: 36px; }
+
+.font-mono { font-family: var(--font-mono); }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+
+/* Utility classes */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.badge-income {
+  background: var(--income-bg);
+  color: var(--income-color);
+}
+.badge-expense {
+  background: var(--expense-bg);
+  color: var(--expense-color);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--accent-primary);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--accent-primary-hover); }
+
+.btn-secondary {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+}
+.btn-secondary:hover { background: var(--border-subtle); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+.btn-ghost:hover { background: var(--bg-subtle); color: var(--text-primary); }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-fade { animation: fadeIn 0.3s ease forwards; }
+.animate-slide { animation: slideIn 0.25s ease forwards; }
+
+/* Stagger for lists */
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 40ms; }
+.stagger > *:nth-child(3) { animation-delay: 80ms; }
+.stagger > *:nth-child(4) { animation-delay: 120ms; }
+.stagger > *:nth-child(5) { animation-delay: 160ms; }
+.stagger > *:nth-child(6) { animation-delay: 200ms; }
+
+/* Number styling */
+.amount-positive { color: var(--income-color); }
+.amount-negative { color: var(--expense-color); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  :root { --sidebar-width: 0px; }
+}

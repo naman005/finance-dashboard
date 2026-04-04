@@ -1,0 +1,232 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn 0.3s ease;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+}
+
+.sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.headerActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filterBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  flex-wrap: wrap;
+}
+
+.searchWrap {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  min-width: 180px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-md);
+  padding: 0 12px;
+  border: 1px solid var(--border-default);
+  transition: border-color var(--transition);
+}
+
+.searchWrap:focus-within {
+  border-color: rgba(255,255,255,0.15);
+}
+
+.searchIcon {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 13.5px;
+  font-family: var(--font-sans);
+  padding: 9px 0;
+  outline: none;
+}
+
+.searchInput::placeholder { color: var(--text-tertiary); }
+
+.filterChips {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  border: 1px solid var(--border-default);
+}
+
+.filterChips button { flex: 1; }
+
+.chip {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-sans);
+}
+
+.chip:hover { color: var(--text-primary); }
+
+.chipActive {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.filterBtnActive {
+  background: var(--accent-primary-bg);
+  color: var(--accent-primary);
+  border-color: rgba(200,129,58,0.2);
+}
+
+.expandedFilters {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 16px 20px;
+  flex-wrap: wrap;
+  background: var(--bg-subtle);
+  border-style: dashed;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 140px;
+}
+
+.filterLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.filterSelect{
+  padding: 8px 10px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.filterRow {
+  display: flex;
+  gap: 8px;
+}
+
+.tableCard {
+  padding: 0;
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-default);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.sortable {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+  transition: color var(--transition);
+}
+.sortable:hover { color: var(--text-primary); }
+
+.txList {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .filterBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchWrap {
+    width: 100%;
+  }
+
+  .filterChips {
+    flex: 1;
+    display: flex;
+  }
+
+  .filterBtn {
+    flex: 0 0 22%; /* ~1/5 width */
+    justify-content: center;
+  }
+}
+

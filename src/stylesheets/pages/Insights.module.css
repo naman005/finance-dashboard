@@ -1,0 +1,234 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.metricsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.metricCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  transition: box-shadow var(--transition);
+}
+
+.metricCard:hover { box-shadow: var(--shadow-md); }
+
+.highlight {
+  background: linear-gradient(135deg, var(--accent-primary-bg), var(--bg-surface));
+  border-color: rgba(200,129,58,0.25);
+}
+
+.highlight .metricIcon { color: var(--accent-primary); }
+
+.metricIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+  display: grid;
+  place-items: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.metricInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metricLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.metricValue {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+}
+
+.metricSub {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.positive { color: var(--income-color) !important; }
+.negative { color: var(--expense-color) !important; }
+
+.chartsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.chartCard {
+  padding: 20px;
+}
+
+.chartTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+.chartSub {
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.observationsCard {
+  padding: 20px;
+}
+
+.obsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.obsItem {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+}
+
+.obsItem.positive {
+  background: var(--income-bg);
+  border-color: rgba(45,106,79,0.15);
+}
+.obsItem.positive .obsIcon { color: var(--income-color); margin-top: 1px; }
+
+.obsItem.warning {
+  background: var(--expense-bg);
+  border-color: rgba(192,57,43,0.15);
+}
+.obsItem.warning .obsIcon { color: var(--expense-color); margin-top: 1px; }
+
+.obsItem.neutral {
+  background: var(--bg-subtle);
+  border-color: var(--border-default);
+}
+.obsItem.neutral .obsIcon { color: var(--text-secondary); margin-top: 1px; }
+
+.obsItem.tip {
+  background: var(--accent-primary-bg);
+  border-color: rgba(200,129,58,0.2);
+}
+.obsItem.tip .obsIcon { color: var(--accent-primary); margin-top: 1px; }
+
+.obsIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.obsText {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.monthRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.monthCard {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.monthBest {
+  background: linear-gradient(135deg, var(--income-bg), var(--bg-surface));
+  border-color: rgba(45,106,79,0.2);
+}
+
+.monthWorst {
+  background: linear-gradient(135deg, var(--expense-bg), var(--bg-surface));
+  border-color: rgba(192,57,43,0.15);
+}
+
+.monthBadge {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.monthName {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--text-primary);
+}
+
+.monthStat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.monthStat:last-child { border-bottom: none; padding-bottom: 0; }
+
+.monthValue {
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1024px) {
+  .chartsRow { grid-template-columns: 1fr; }
+  .metricsRow { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .monthRow { grid-template-columns: 1fr; }
+}
