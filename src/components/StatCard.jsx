@@ -1,27 +1,8 @@
 import styles from "../stylesheets/components/StatCard.module.css";
 import { LineChart, Line } from "recharts";
 import { ArrowUpRight, ArrowDownRight, Minus } from "lucide-react";
+import { formatAmount } from "../utils/helpers";
 
-function formatAmount(value) {
-  if (value >= 100000) return `₹${(value / 100000).toFixed(2)}L`;
-  if (value >= 1000)   return `₹${(value / 1000).toFixed(1)}K`;
-  return `₹${value.toLocaleString("en-IN")}`;
-}
-
-/**
- * StatCard — shared summary metric card.
- *
- * Props
- * ─────
- * label       {string}     Card heading, e.g. "Total Balance"
- * value       {number}     Main metric value in ₹
- * change      {number}     % change vs last period (optional)
- * changeLabel {string}     Text next to %, default "vs last month"
- * variant     {string}     "balance" | "income" | "expense" | "default"
- * icon        {ReactNode}  Small icon, shown top-right
- * sparkData   {number[]}   Raw number array → sparkline (optional)
- * sparkColor  {string}     Sparkline stroke color (optional)
- */
 export default function StatCard({
   label,
   value,
@@ -41,16 +22,13 @@ export default function StatCard({
   return (
     <div className={`${styles.card} ${styles[variant] || ""}`}>
 
-      {/* Top: label + icon */}
       <div className={styles.top}>
         <span className={styles.label}>{label}</span>
         {icon && <div className={styles.iconWrap}>{icon}</div>}
       </div>
 
-      {/* Main value */}
       <div className={styles.value}>{formatAmount(value)}</div>
 
-      {/* Bottom: change badge + sparkline */}
       <div className={styles.bottom}>
         {hasChange && (
           <span className={`${styles.change} ${

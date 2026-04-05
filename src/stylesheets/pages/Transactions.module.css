@@ -227,7 +227,7 @@
   }
 
   .filterBtn {
-    flex: 0 0 22%; /* ~1/5 width */
+    flex: 0 0 22%;
     justify-content: center;
   }
 }

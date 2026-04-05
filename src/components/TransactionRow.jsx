@@ -24,7 +24,7 @@ export default function TransactionRow({ transaction }) {
     setEditing(false);
   }
 
-  /* ── EDIT MODE ── */
+
   if (editing) {
     return (
       <div className={`${styles.row} ${styles.editRow}`}>
@@ -71,11 +71,10 @@ export default function TransactionRow({ transaction }) {
     );
   }
 
-  /* ── READ MODE ── */
+
   return (
     <div className={styles.row}>
 
-      {/* Description + icon */}
       <div className={styles.nameCell}>
         <div className={styles.icon} style={{ background: cat.color+"18", color: cat.color }}>
           {cat.icon}
@@ -86,13 +85,10 @@ export default function TransactionRow({ transaction }) {
         </div>
       </div>
 
-      {/* Category badge */}
       <span className={`badge badge-${transaction.type}`}>{cat.label}</span>
 
-      {/* Date */}
       <span className={styles.date}>{formatDate(transaction.date)}</span>
 
-      {/* Actions (admin) — always reserve space so amount doesn't jump */}
       <div className={styles.actionsCell}>
         {isAdmin && (
           <div className={styles.actionBtns}>
@@ -106,7 +102,6 @@ export default function TransactionRow({ transaction }) {
         )}
       </div>
 
-      {/* Amount */}
       <span className={`${styles.amount} ${transaction.type==="income" ? styles.income : styles.expense}`}>
         {transaction.type==="income" ? "+" : "−"}{formatAmount(transaction.amount)}
       </span>

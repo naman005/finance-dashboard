@@ -57,11 +57,9 @@ export default function Layout() {
   return (
     <div className={styles.layout}>
 
-      {/* ── SIDEBAR ── */}
       <aside className={`${styles.sidebar} ${mobileOpen ? styles.open : ""}`}>
         <div className={styles.sidebarInner}>
 
-          {/* Logo + close btn on mobile */}
           <div className={styles.logo}>
             <div className={styles.logoMark}>Z</div>
             <span className={styles.logoText}>Zorvyn</span>
@@ -70,7 +68,6 @@ export default function Layout() {
             </button>
           </div>
 
-          {/* Nav links */}
           <nav className={styles.nav}>
             <span className={styles.navLabel}>Main</span>
             {NAV_ITEMS.map(({ path, label, icon: Icon }) => (
@@ -88,7 +85,6 @@ export default function Layout() {
             ))}
           </nav>
 
-          {/* Footer: role + theme + user */}
           <div className={styles.sidebarFooter}>
             <div className={styles.roleSection}>
               <span className={styles.roleLabel}>Role</span>
@@ -129,15 +125,12 @@ export default function Layout() {
         </div>
       </aside>
 
-      {/* Backdrop overlay (mobile only) */}
       {mobileOpen && (
         <div className={`${styles.backdrop} ${mobileOpen ? styles.active : ""}`} onClick={closeSidebar} />
       )}
 
-      {/* ── MAIN AREA ── */}
       <main className={styles.main}>
 
-        {/* Slim mobile top bar — just hamburger + logo */}
         <div className={styles.mobileBar}>
           <button
             className={styles.hamburger}
@@ -147,7 +140,6 @@ export default function Layout() {
             <Menu size={20} />
           </button>
           <span className={styles.mobileLogoText}>Zorvyn</span>
-          {/* Action buttons also accessible on mobile bar */}
           <div className={styles.mobileActions}>
             <button
               className={styles.iconBtn}
@@ -173,9 +165,7 @@ export default function Layout() {
           </div>
         </div>
 
-        {/* Page content — Dashboard injects its own header with action buttons */}
         <div className={styles.content}>
-          {/* Pass controls as context so Dashboard can render them in its header */}
           <Outlet context={{ toggleFullscreen, isFullscreen }} />
         </div>
       </main>

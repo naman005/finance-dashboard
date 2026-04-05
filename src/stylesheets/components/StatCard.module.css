@@ -17,13 +17,13 @@
   transform: translateY(-1px);
 }
 
-/* Variants */
+
 .card.balance {
   background: linear-gradient(140deg, var(--income-bg) 0%, var(--bg-surface) 100%);
   border-color: rgba(45, 106, 79, 0.2);
 }
 
-/* Top row */
+
 .top {
   display: flex;
   align-items: center;
@@ -52,7 +52,7 @@
 .card.income  .iconWrap { background: var(--income-bg);  color: var(--income-color);  }
 .card.expense .iconWrap { background: var(--expense-bg); color: var(--expense-color); }
 
-/* Main value */
+
 .value {
   font-size: 28px;
   font-weight: 300;
@@ -62,7 +62,7 @@
   color: var(--text-primary);
 }
 
-/* Bottom */
+
 .bottom {
   display: flex;
   align-items: flex-end;

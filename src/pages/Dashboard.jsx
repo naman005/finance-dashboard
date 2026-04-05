@@ -115,7 +115,6 @@ export default function Dashboard() {
             />
           </div>
           <CashFlowChart />
-          {/* RECENT TRANSACTIONS TABLE */}
           <TransactionTable transactions={recent} />
         </div>
 

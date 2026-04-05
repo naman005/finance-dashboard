@@ -118,7 +118,7 @@
   box-shadow: 0 0 0 3px var(--accent-primary-bg);
 }
 
-/* "Add new category" link-style button */
+
 .customLink {
   display: inline-flex;
   align-items: center;

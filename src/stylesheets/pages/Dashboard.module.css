@@ -5,13 +5,13 @@
   animation: fadeIn 0.3s ease both;
 }
 
-/* ── HEADER ── */
+
 .pageHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  flex-wrap: nowrap; /* never wrap to column */
+  flex-wrap: nowrap;
 }
 
 .greeting {
@@ -29,7 +29,7 @@
   margin-top: 3px;
 }
 
-/* Always-row action buttons */
+
 .headerActions {
   display: flex;
   align-items: center;
@@ -38,7 +38,7 @@
   flex-wrap: nowrap;
 }
 
-/* Round icon button */
+
 .roundBtn {
   display: inline-flex;
   align-items: center;
@@ -64,12 +64,12 @@
   border-color: var(--border-strong);
 }
 
-/* Role pill has a label */
+
 .rolePill {
   padding: 0 12px;
 }
 
-/* ── BODY: left + right ── */
+
 .body {
   display: grid;
   grid-template-columns: 1fr 296px;
@@ -84,14 +84,14 @@
   min-width: 0;
 }
 
-/* ── STAT CARDS GRID ── */
+
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 
-/* ── CHART CARD ── */
+
 .chartCard {
   padding: 20px;
 }
@@ -134,7 +134,7 @@
   font-weight: 500;
 }
 
-/* ── TRANSACTION TABLE ── */
+
 .txCard {
   padding: 20px;
 }
@@ -226,7 +226,7 @@
   font-size: 13px;
 }
 
-/* ── RIGHT PANEL ── */
+
 .rightPanel {
   display: flex;
   flex-direction: column;
@@ -234,7 +234,7 @@
   min-width: 0;
 }
 
-/* Pie */
+
 .pieCard { padding: 20px; }
 
 .pieWrap {
@@ -322,7 +322,7 @@
   text-align: right;
 }
 
-/* Quick stats */
+
 .quickCard { padding: 18px 20px; }
 
 .quickList {
@@ -358,7 +358,7 @@
   color: var(--text-primary);
 }
 
-/* ── RESPONSIVE ── */
+
 @media (max-width: 1060px) {
   .body { grid-template-columns: 1fr; }
   .rightPanel {
@@ -373,7 +373,7 @@
   .statsGrid { grid-template-columns: repeat(2, 1fr); }
   .statsGrid > *:last-child { grid-column: 1 / -1; }
 
-  /* Hide category column in tx table */
+
   .txTableHead,
   .txRow { grid-template-columns: 2fr 80px 90px; }
   .txTableHead span:nth-child(2),
@@ -393,7 +393,7 @@
   .txRow .txDate { display: none; }
 
   .greeting { font-size: 17px; }
-  /* On very small, hide the text label in role button */
+
   .rolePill span { display: none; }
   .rolePill { padding: 0; width: 36px; }
 }

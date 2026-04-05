@@ -59,7 +59,6 @@ export default function Expenses() {
 
   const totalExpenses = expenseTransactions.reduce((s, t) => s + t.amount, 0);
 
-  // By category breakdown
   const byCategory = Object.entries(CATEGORIES)
     .filter(
       ([key]) =>
@@ -83,7 +82,6 @@ export default function Expenses() {
     expenses: m.expenses,
   }));
 
-  // Budget comparison
   const budgetData = BUDGET_GOALS.map((bg) => ({
     ...bg,
     catLabel: CATEGORIES[bg.category]?.label || bg.category,
@@ -107,7 +105,6 @@ export default function Expenses() {
         </div>
       </div>
 
-      {/* Stat row */}
       <div className={styles.statsRow}>
         <div className={`card ${styles.statCard}`}>
           <span className={styles.statLabel}>Total Expenses</span>
@@ -148,7 +145,6 @@ export default function Expenses() {
       </div>
 
       <div className={styles.mainGrid}>
-        {/* Monthly Expenses Chart */}
         <div className={`card ${styles.chartCard}`}>
           <div style={{ marginBottom: 18 }}>
             <h3 className={styles.chartTitle}>Monthly Expenses</h3>
@@ -193,7 +189,6 @@ export default function Expenses() {
           </ResponsiveContainer>
         </div>
 
-        {/* Category Breakdown */}
         <div className={`card ${styles.catCard}`}>
           <h3 className={styles.chartTitle} style={{ marginBottom: 16 }}>
             By Category
@@ -232,7 +227,6 @@ export default function Expenses() {
         </div>
       </div>
 
-      {/* Budget tracker */}
       <div className={`card ${styles.budgetCard}`}>
         <div className={styles.budgetHeader}>
           <h3 className={styles.chartTitle}>Budget Tracker</h3>
@@ -288,7 +282,6 @@ export default function Expenses() {
         </div>
       </div>
 
-      {/* Transaction list */}
       <div className={`card ${styles.txCard}`}>
         <div className={styles.txHeader}>
           <h3 className={styles.chartTitle}>All Expense Transactions</h3>

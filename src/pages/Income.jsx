@@ -61,7 +61,6 @@ export default function Income() {
 
   const totalIncome = incomeTransactions.reduce((s, t) => s + t.amount, 0);
 
-  // By source
   const bySource = INCOME_CATS.map((cat) => ({
     name: CATEGORIES[cat]?.label || cat,
     icon: CATEGORIES[cat]?.icon || "💰",
@@ -96,7 +95,6 @@ export default function Income() {
         </div>
       </div>
 
-      {/* Summary row */}
       <div className={styles.summaryRow}>
         <div className={`card ${styles.summaryCard}`}>
           <span className={styles.summaryLabel}>Total Income</span>
@@ -139,7 +137,6 @@ export default function Income() {
       </div>
 
       <div className={styles.mainGrid}>
-        {/* Monthly Chart */}
         <div className={`card ${styles.chartCard}`}>
           <div className={styles.chartHeader}>
             <div>
@@ -183,7 +180,6 @@ export default function Income() {
           </ResponsiveContainer>
         </div>
 
-        {/* Source breakdown */}
         <div className={`card ${styles.sourceCard}`}>
           <h3 className={styles.chartTitle} style={{ marginBottom: 16 }}>
             By Source
@@ -221,7 +217,6 @@ export default function Income() {
         </div>
       </div>
 
-      {/* Income Transactions List */}
       <div className={`card ${styles.txCard}`}>
         <div className={styles.txHeader}>
           <h3 className={styles.chartTitle}>All Income Transactions</h3>

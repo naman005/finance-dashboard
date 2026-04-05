@@ -24,7 +24,7 @@
 
 .row:hover { background: var(--bg-subtle); }
 
-/* ── NAME CELL ── */
+
 .nameCell {
   display: flex;
   align-items: center;
@@ -64,13 +64,13 @@
   text-transform: capitalize;
 }
 
-/* ── DATE ── */
+
 .date {
   font-size: 12px;
   color: var(--text-tertiary);
 }
 
-/* ── ACTIONS CELL ── */
+
 .actionsCell {
   display: flex;
   justify-content: flex-start;
@@ -110,7 +110,7 @@
   color: var(--expense-color);
 }
 
-/* ── AMOUNT ── */
+
 .amount {
   font-size: 13px;
   font-weight: 600;
@@ -122,7 +122,7 @@
 .income  { color: var(--income-color);  }
 .expense { color: var(--expense-color); }
 
-/* ── EDIT MODE ── */
+
 .editRow {
   grid-template-columns: 2fr 1.2fr 110px 100px 100px auto;
   background: var(--bg-subtle);
@@ -183,7 +183,7 @@
 
 
 
-/* ── <= 700px (FINAL MOBILE STATE) ── */
+
 @media (max-width: 700px) {
   .row {
     grid-template-areas: "name actions amount";

@@ -24,7 +24,6 @@ export default function AddTransactionModal({ onClose, defaultType }) {
     if (!form.description.trim()) return setError("Description is required");
     if (!form.amount || Number(form.amount) <= 0) return setError("Enter a valid amount");
 
-    // If user typed a custom category, use it (lowercase, trimmed)
     const finalCategory = showCustom && customCat.trim()
       ? customCat.trim().toLowerCase().replace(/\s+/g, "_")
       : form.category;
@@ -36,7 +35,6 @@ export default function AddTransactionModal({ onClose, defaultType }) {
     onClose();
   }
 
-  // Show ALL categories regardless of type — user should pick freely
   const categoryEntries = Object.entries(CATEGORIES);
 
   return createPortal(
@@ -50,7 +48,6 @@ export default function AddTransactionModal({ onClose, defaultType }) {
 
         <form onSubmit={handleSubmit} className={styles.form}>
 
-          {/* Type toggle */}
           <div className={styles.typeToggle}>
             {["income","expense"].map(t => (
               <button
@@ -63,7 +60,6 @@ export default function AddTransactionModal({ onClose, defaultType }) {
             ))}
           </div>
 
-          {/* Description */}
           <div className={styles.field}>
             <label className={styles.label}>Description</label>
             <input
@@ -74,7 +70,6 @@ export default function AddTransactionModal({ onClose, defaultType }) {
             />
           </div>
 
-          {/* Amount + Date */}
           <div className={styles.row2}>
             <div className={styles.field}>
               <label className={styles.label}>Amount (₹)</label>
@@ -95,7 +90,6 @@ export default function AddTransactionModal({ onClose, defaultType }) {
             </div>
           </div>
 
-          {/* Category — all categories shown + custom option */}
           <div className={styles.field}>
             <label className={styles.label}>Category</label>
             {!showCustom ? (

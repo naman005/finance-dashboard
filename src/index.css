@@ -1,11 +1,11 @@
-/* ===== Finio DESIGN SYSTEM ===== */
-/* Aesthetic: Refined Editorial Finance — warm slate neutrals, green accents */
-/* Inspired by: Bloomberg, Stripe Dashboard, Linear, Xenith */
+
+
+
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mada:wght@200..900&display=swap');
 
 :root {
-  /* Light Theme */
+
   --bg-base: #F7F6F3;
   --bg-surface: #FFFFFF;
   --bg-elevated: #FFFFFF;
@@ -22,7 +22,7 @@
   --border-subtle: #EEEDE8;
   --border-strong: #C9C7BF;
 
-  /* Primary accent — deep forest green, professional */
+
   --accent-primary: #1a3a2a;
   --accent-primary-hover: #122a1e;
   --accent-primary-bg: #eef5f1;
@@ -72,7 +72,7 @@
   --border-subtle: #252522;
   --border-strong: #403E3A;
 
-  /* Keep accent readable in dark */
+
   --accent-primary: #3d8a65;
   --accent-primary-hover: #2d6a4f;
   --accent-primary-bg: #142419;
@@ -119,13 +119,13 @@ body {
   min-height: 100dvh;
 }
 
-/* Scrollbar */
+
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
 
-/* Typography Scale */
+
 .text-xs  { font-size: 11px; line-height: 16px; }
 .text-sm  { font-size: 12px; line-height: 18px; }
 .text-base{ font-size: 14px; line-height: 20px; }
@@ -138,7 +138,7 @@ body {
 .font-medium  { font-weight: 500; }
 .font-semibold{ font-weight: 600; }
 
-/* ===== CARD ===== */
+
 .card {
   background: var(--bg-surface);
   border: 1px solid var(--border-default);
@@ -146,7 +146,7 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-/* ===== BADGE ===== */
+
 .badge {
   display: inline-flex;
   align-items: center;
@@ -166,7 +166,7 @@ body {
   color: var(--expense-color);
 }
 
-/* ===== BUTTONS ===== */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -211,7 +211,7 @@ body {
   color: var(--text-primary);
 }
 
-/* ===== ANIMATIONS ===== */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -228,7 +228,7 @@ body {
 .animate-fade  { animation: fadeIn  0.3s  ease forwards; }
 .animate-slide { animation: slideIn 0.25s ease forwards; }
 
-/* Stagger helpers */
+
 .stagger > *:nth-child(1) { animation-delay:   0ms; }
 .stagger > *:nth-child(2) { animation-delay:  40ms; }
 .stagger > *:nth-child(3) { animation-delay:  80ms; }
@@ -236,11 +236,11 @@ body {
 .stagger > *:nth-child(5) { animation-delay: 160ms; }
 .stagger > *:nth-child(6) { animation-delay: 200ms; }
 
-/* Amount helpers */
+
 .amount-positive { color: var(--income-color); }
 .amount-negative { color: var(--expense-color); }
 
-/* Responsive sidebar collapse */
+
 @media (max-width: 768px) {
   :root { --sidebar-width: 0px; }
 }

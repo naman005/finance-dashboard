@@ -86,9 +86,7 @@ export default function Transactions() {
         </div>
       </div>
 
-      {/* Search & Filter bar */}
       <div className={`card ${styles.filterBar}`}>
-        {/* Search */}
         <div className={styles.searchWrap}>
           <Search size={15} className={styles.searchIcon} />
           <input
@@ -121,7 +119,6 @@ export default function Transactions() {
         </div>
       </div>
 
-      {/* Expanded filters */}
       {showFilters && (
         <div className={`card ${styles.expandedFilters}`}>
           <div className={styles.filterGroup}>
@@ -179,7 +176,6 @@ export default function Transactions() {
         </div>
       )}
 
-      {/* Table header */}
       <div className={`card ${styles.tableCard}`}>
         <div className={styles.tableHeader}>
           <span>Transaction</span>

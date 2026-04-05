@@ -366,7 +366,6 @@ export default function Insights() {
     .reduce((s, t) => s + t.amount, 0);
   const savingsRate = getSavingsRate(income, expenses);
 
-  // Highest spending category
   const catMap = {};
   transactions
     .filter((t) => t.type === "expense")
@@ -377,7 +376,6 @@ export default function Insights() {
   const topCatName = topCat ? CATEGORIES[topCat[0]]?.label : "—";
   const topCatAmt = topCat ? topCat[1] : 0;
 
-  // Month comparison data
   const monthComparison = MONTHLY_DATA.map((m) => ({
     month: m.month,
     Income: m.income,
@@ -385,7 +383,6 @@ export default function Insights() {
     Savings: m.income - m.expenses,
   }));
 
-  // Best month (savings)
   const bestMonth = [...MONTHLY_DATA].sort(
     (a, b) => b.income - b.expenses - (a.income - a.expenses),
   )[0];
@@ -393,7 +390,6 @@ export default function Insights() {
     (a, b) => a.income - a.expenses - (b.income - b.expenses),
   )[0];
 
-  // Spending trend (last 3 vs previous 3 months)
   const last3Exp = MONTHLY_DATA.slice(-3).reduce((s, m) => s + m.expenses, 0);
   const prev3Exp = MONTHLY_DATA.slice(0, 3).reduce((s, m) => s + m.expenses, 0);
   const expTrend =
@@ -405,13 +401,11 @@ export default function Insights() {
   const incTrend =
     prev3Inc > 0 ? Math.round(((last3Inc - prev3Inc) / prev3Inc) * 100) : 0;
 
-  // Top spending categories for bar chart
   const catBarData = Object.entries(catMap)
     .map(([key, val]) => ({ name: CATEGORIES[key]?.label || key, value: val }))
     .sort((a, b) => b.value - a.value)
     .slice(0, 6);
 
-  // Generate smart observations
   const observations = [];
   if (savingsRate >= 30)
     observations.push({
