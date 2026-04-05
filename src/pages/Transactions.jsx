@@ -192,14 +192,14 @@ export default function Transactions() {
             }}
           >
             <span
-              className={styles.sortable}
+              className={styles.sortableDate}
               onClick={() => handleSort("date")}
             >
               Date <SortIcon field="date" />
             </span>
             {state.role === "admin" && <span>Actions</span>}
             <span
-              className={styles.sortable}
+              className={styles.sortableAmount}
               onClick={() => handleSort("amount")}
             >
               Amount <SortIcon field="amount" />

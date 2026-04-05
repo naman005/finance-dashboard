@@ -177,7 +177,7 @@
   color: var(--text-tertiary);
 }
 
-.sortable {
+.sortableDate, .sortableAmount {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -185,7 +185,7 @@
   user-select: none;
   transition: color var(--transition);
 }
-.sortable:hover { color: var(--text-primary); }
+.sortableDate:hover, .sortableAmount:hover { color: var(--text-primary); }
 
 .txList {
   display: flex;
@@ -209,11 +209,13 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 700px) {
   .filterBar {
     flex-direction: column;
     align-items: stretch;
   }
+
+  .sortableDate { display: none; }
 
   .searchWrap {
     width: 100%;

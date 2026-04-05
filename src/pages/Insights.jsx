@@ -75,6 +75,285 @@ function getSavingsRate(income, expenses) {
   return Math.round(((income - expenses) / income) * 100);
 }
 
+function BestWorstMonth({ bestMonth, worstMonth }) {
+  return (
+    <div className={styles.monthRow}>
+      <div className={`card ${styles.monthCard} ${styles.monthBest}`}>
+        <span className={styles.monthBadge}>Best Month</span>
+        <div className={styles.monthName}>{bestMonth?.month}</div>
+        <div className={styles.monthStat}>
+          <span>Saved</span>
+          <span
+            className={styles.monthValue}
+            style={{ color: "var(--income-color)" }}
+          >
+            ₹
+            {(
+              (bestMonth?.income || 0) - (bestMonth?.expenses || 0)
+            ).toLocaleString("en-IN")}
+          </span>
+        </div>
+        <div className={styles.monthStat}>
+          <span>Income</span>
+          <span>₹{bestMonth?.income.toLocaleString("en-IN")}</span>
+        </div>
+        <div className={styles.monthStat}>
+          <span>Expenses</span>
+          <span>₹{bestMonth?.expenses.toLocaleString("en-IN")}</span>
+        </div>
+      </div>
+      <div className={`card ${styles.monthCard} ${styles.monthWorst}`}>
+        <span className={styles.monthBadge}>Lowest Savings</span>
+        <div className={styles.monthName}>{worstMonth?.month}</div>
+        <div className={styles.monthStat}>
+          <span>Saved</span>
+          <span
+            className={styles.monthValue}
+            style={{ color: "var(--expense-color)" }}
+          >
+            ₹
+            {(
+              (worstMonth?.income || 0) - (worstMonth?.expenses || 0)
+            ).toLocaleString("en-IN")}
+          </span>
+        </div>
+        <div className={styles.monthStat}>
+          <span>Income</span>
+          <span>₹{worstMonth?.income.toLocaleString("en-IN")}</span>
+        </div>
+        <div className={styles.monthStat}>
+          <span>Expenses</span>
+          <span>₹{worstMonth?.expenses.toLocaleString("en-IN")}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Observation({ observations }) {
+  return (
+    <div className={`card ${styles.observationsCard}`}>
+      <h3 className={styles.chartTitle} style={{ marginBottom: 16 }}>
+        <Lightbulb
+          size={16}
+          style={{
+            display: "inline",
+            marginRight: 8,
+            color: "var(--accent-primary)",
+          }}
+        />
+        Smart Observations
+      </h3>
+      <div className={styles.obsList}>
+        {observations.map((obs, i) => (
+          <div key={i} className={`${styles.obsItem} ${styles[obs.type]}`}>
+            {obs.type === "positive" && (
+              <CheckCircle2 size={15} className={styles.obsIcon} />
+            )}
+            {obs.type === "warning" && (
+              <AlertCircle size={15} className={styles.obsIcon} />
+            )}
+            {obs.type === "neutral" && (
+              <Target size={15} className={styles.obsIcon} />
+            )}
+            {obs.type === "tip" && (
+              <Lightbulb size={15} className={styles.obsIcon} />
+            )}
+            <p className={styles.obsText}>{obs.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SpendingBar({ catBarData }) {
+  return (
+    <div className={`card ${styles.chartCard}`}>
+      <div style={{ marginBottom: 18 }}>
+        <h3 className={styles.chartTitle}>Spending by Category</h3>
+        <p className={styles.chartSub}>Top spending categories</p>
+      </div>
+      <ResponsiveContainer width="100%" height={240}>
+        <BarChart
+          data={catBarData}
+          layout="vertical"
+          margin={{ top: 0, right: 10, left: 0, bottom: 0 }}
+          barSize={16}
+        >
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="var(--border-subtle)"
+            horizontal={false}
+          />
+          <XAxis
+            type="number"
+            tick={{ fontSize: 11, fill: "var(--text-tertiary)" }}
+            axisLine={false}
+            tickLine={false}
+            tickFormatter={(v) => `₹${(v / 1000).toFixed(0)}K`}
+          />
+          <YAxis
+            type="category"
+            dataKey="name"
+            tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
+            axisLine={false}
+            tickLine={false}
+            width={90}
+          />
+          <Tooltip
+            content={<CustomTooltip />}
+            cursor={{ fill: "var(--bg-subtle)" }}
+          />
+          <Bar dataKey="value" name="Spent" radius={[0, 5, 5, 0]}>
+            {catBarData.map((_, i) => (
+              <Cell key={i} fill={COLORS[i % COLORS.length]} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
+function MonthlyComparison({ monthComparison }) {
+  return (
+    <div className={`card ${styles.chartCard}`}>
+      <div style={{ marginBottom: 18 }}>
+        <h3 className={styles.chartTitle}>Monthly Comparison</h3>
+        <p className={styles.chartSub}>Income, expenses, and net savings</p>
+      </div>
+      <ResponsiveContainer width="100%" height={240}>
+        <LineChart
+          data={monthComparison}
+          margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+        >
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="var(--border-subtle)"
+            vertical={false}
+          />
+          <XAxis
+            dataKey="month"
+            tick={{ fontSize: 11, fill: "var(--text-tertiary)" }}
+            axisLine={false}
+            tickLine={false}
+          />
+          <YAxis
+            tick={{ fontSize: 11, fill: "var(--text-tertiary)" }}
+            axisLine={false}
+            tickLine={false}
+            tickFormatter={(v) => `₹${(v / 1000).toFixed(0)}K`}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          <Legend
+            iconType="circle"
+            iconSize={8}
+            formatter={(v) => (
+              <span style={{ fontSize: 11, color: "var(--text-secondary)" }}>
+                {v}
+              </span>
+            )}
+          />
+          <Line
+            type="monotone"
+            dataKey="Income"
+            stroke="#2D6A4F"
+            strokeWidth={2}
+            dot={{ r: 3 }}
+          />
+          <Line
+            type="monotone"
+            dataKey="Expenses"
+            stroke="#E76F51"
+            strokeWidth={2}
+            dot={{ r: 3 }}
+          />
+          <Line
+            type="monotone"
+            dataKey="Savings"
+            stroke="#C8813A"
+            strokeWidth={2}
+            strokeDasharray="4 2"
+            dot={{ r: 3 }}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
+function KeyMetrics({
+  savingsRate,
+  incTrend,
+  expTrend,
+  topCatName,
+  topCatAmt,
+}) {
+  const incomeClass = incTrend < 0 ? styles.negative : styles.positive;
+  const expenseClass = expTrend > 0 ? styles.negative : styles.positive;
+
+  return (
+    <div className={styles.metricsRow}>
+      <div className={`card ${styles.metricCard} ${styles.highlight}`}>
+        <div className={styles.metricIcon}>
+          <Target size={18} />
+        </div>
+        <div className={styles.metricInfo}>
+          <span className={styles.metricLabel}>Savings Rate</span>
+          <span className={styles.metricValue}>{savingsRate}%</span>
+          <span className={styles.metricSub}>
+            {savingsRate >= 20 ? "✓ On track" : "↓ Below target"}
+          </span>
+        </div>
+      </div>
+      <div className={`card ${styles.metricCard}`}>
+        <div className={`${styles.metricIcon} ${incomeClass}`}>
+          <TrendingUp size={18} />
+        </div>
+        <div className={styles.metricInfo}>
+          <span className={styles.metricLabel}>Income Trend</span>
+          <span className={`${styles.metricValue} ${incomeClass}`}>
+            {incTrend > 0 ? "+" : ""}
+            {incTrend}%
+          </span>
+          <span className={styles.metricSub}>vs previous quarter</span>
+        </div>
+      </div>
+      <div className={`card ${styles.metricCard}`}>
+        <div className={`${styles.metricIcon} ${expenseClass}`}>
+          <TrendingDown size={18} />
+        </div>
+        <div className={styles.metricInfo}>
+          <span className={styles.metricLabel}>Expense Trend</span>
+          <span className={`${styles.metricValue} ${expenseClass}`}>
+            {expTrend >= 0 ? "+" : ""}
+            {expTrend}%
+          </span>
+          <span className={styles.metricSub}>vs previous quarter</span>
+        </div>
+      </div>
+      <div className={`card ${styles.metricCard}`}>
+        <div
+          className={styles.metricIcon}
+          style={{ color: "var(--accent-primary)" }}
+        >
+          <Lightbulb size={18} />
+        </div>
+        <div className={styles.metricInfo}>
+          <span className={styles.metricLabel}>Top Expense</span>
+          <span className={styles.metricValue} style={{ fontSize: 16 }}>
+            {topCatName}
+          </span>
+          <span className={styles.metricSub}>
+            ₹{topCatAmt.toLocaleString("en-IN")} total
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Insights() {
   const { state } = useApp();
   const { transactions } = state;
@@ -85,7 +364,6 @@ export default function Insights() {
   const expenses = transactions
     .filter((t) => t.type === "expense")
     .reduce((s, t) => s + t.amount, 0);
-  const balance = income - expenses;
   const savingsRate = getSavingsRate(income, expenses);
 
   // Highest spending category
@@ -184,9 +462,6 @@ export default function Insights() {
     text: `Your best savings month was ${bestMonth?.month} with ₹${(bestMonth?.income - bestMonth?.expenses).toLocaleString("en-IN")} saved. Use it as a benchmark.`,
   });
 
-  const incomeClass = incTrend < 0 ? styles.negative : styles.positive;
-  const expenseClass = expTrend > 0 ? styles.negative : styles.positive;
-
   return (
     <div className={styles.page}>
       <div className={styles.pageHeader}>
@@ -198,265 +473,21 @@ export default function Insights() {
         </div>
       </div>
 
-      {/* Key Metrics */}
-      <div className={styles.metricsRow}>
-        <div className={`card ${styles.metricCard} ${styles.highlight}`}>
-          <div className={styles.metricIcon}>
-            <Target size={18} />
-          </div>
-          <div className={styles.metricInfo}>
-            <span className={styles.metricLabel}>Savings Rate</span>
-            <span className={styles.metricValue}>{savingsRate}%</span>
-            <span className={styles.metricSub}>
-              {savingsRate >= 20 ? "✓ On track" : "↓ Below target"}
-            </span>
-          </div>
-        </div>
-        <div className={`card ${styles.metricCard}`}>
-          <div className={`${styles.metricIcon} ${incomeClass}`}>
-            <TrendingUp size={18} />
-          </div>
-          <div className={styles.metricInfo}>
-            <span className={styles.metricLabel}>Income Trend</span>
-            <span className={`${styles.metricValue} ${incomeClass}`}>
-              {incTrend > 0 ? "+" : ""}
-              {incTrend}%
-            </span>
-            <span className={styles.metricSub}>vs previous quarter</span>
-          </div>
-        </div>
-        <div className={`card ${styles.metricCard}`}>
-          <div className={`${styles.metricIcon} ${expenseClass}`}>
-            <TrendingDown size={18} />
-          </div>
-          <div className={styles.metricInfo}>
-            <span className={styles.metricLabel}>Expense Trend</span>
-            <span className={`${styles.metricValue} ${expenseClass}`}>
-              {expTrend >= 0 ? "+" : ""}
-              {expTrend}%
-            </span>
-            <span className={styles.metricSub}>vs previous quarter</span>
-          </div>
-        </div>
-        <div className={`card ${styles.metricCard}`}>
-          <div
-            className={styles.metricIcon}
-            style={{ color: "var(--accent-primary)" }}
-          >
-            <Lightbulb size={18} />
-          </div>
-          <div className={styles.metricInfo}>
-            <span className={styles.metricLabel}>Top Expense</span>
-            <span className={styles.metricValue} style={{ fontSize: 16 }}>
-              {topCatName}
-            </span>
-            <span className={styles.metricSub}>
-              ₹{topCatAmt.toLocaleString("en-IN")} total
-            </span>
-          </div>
-        </div>
-      </div>
+      <KeyMetrics
+        savingsRate={savingsRate}
+        incTrend={incTrend}
+        expTrend={expTrend}
+        topCatName={topCatName}
+        topCatAmt={topCatAmt}
+      />
 
-      {/* Charts */}
       <div className={styles.chartsRow}>
-        {/* Monthly comparison */}
-        <div className={`card ${styles.chartCard}`}>
-          <div style={{ marginBottom: 18 }}>
-            <h3 className={styles.chartTitle}>Monthly Comparison</h3>
-            <p className={styles.chartSub}>Income, expenses, and net savings</p>
-          </div>
-          <ResponsiveContainer width="100%" height={240}>
-            <LineChart
-              data={monthComparison}
-              margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
-            >
-              <CartesianGrid
-                strokeDasharray="3 3"
-                stroke="var(--border-subtle)"
-                vertical={false}
-              />
-              <XAxis
-                dataKey="month"
-                tick={{ fontSize: 11, fill: "var(--text-tertiary)" }}
-                axisLine={false}
-                tickLine={false}
-              />
-              <YAxis
-                tick={{ fontSize: 11, fill: "var(--text-tertiary)" }}
-                axisLine={false}
-                tickLine={false}
-                tickFormatter={(v) => `₹${(v / 1000).toFixed(0)}K`}
-              />
-              <Tooltip content={<CustomTooltip />} />
-              <Legend
-                iconType="circle"
-                iconSize={8}
-                formatter={(v) => (
-                  <span
-                    style={{ fontSize: 11, color: "var(--text-secondary)" }}
-                  >
-                    {v}
-                  </span>
-                )}
-              />
-              <Line
-                type="monotone"
-                dataKey="Income"
-                stroke="#2D6A4F"
-                strokeWidth={2}
-                dot={{ r: 3 }}
-              />
-              <Line
-                type="monotone"
-                dataKey="Expenses"
-                stroke="#E76F51"
-                strokeWidth={2}
-                dot={{ r: 3 }}
-              />
-              <Line
-                type="monotone"
-                dataKey="Savings"
-                stroke="#C8813A"
-                strokeWidth={2}
-                strokeDasharray="4 2"
-                dot={{ r: 3 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* Spending categories */}
-        <div className={`card ${styles.chartCard}`}>
-          <div style={{ marginBottom: 18 }}>
-            <h3 className={styles.chartTitle}>Spending by Category</h3>
-            <p className={styles.chartSub}>Top spending categories</p>
-          </div>
-          <ResponsiveContainer width="100%" height={240}>
-            <BarChart
-              data={catBarData}
-              layout="vertical"
-              margin={{ top: 0, right: 10, left: 0, bottom: 0 }}
-              barSize={16}
-            >
-              <CartesianGrid
-                strokeDasharray="3 3"
-                stroke="var(--border-subtle)"
-                horizontal={false}
-              />
-              <XAxis
-                type="number"
-                tick={{ fontSize: 11, fill: "var(--text-tertiary)" }}
-                axisLine={false}
-                tickLine={false}
-                tickFormatter={(v) => `₹${(v / 1000).toFixed(0)}K`}
-              />
-              <YAxis
-                type="category"
-                dataKey="name"
-                tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
-                axisLine={false}
-                tickLine={false}
-                width={90}
-              />
-              <Tooltip
-                content={<CustomTooltip />}
-                cursor={{ fill: "var(--bg-subtle)" }}
-              />
-              <Bar dataKey="value" name="Spent" radius={[0, 5, 5, 0]}>
-                {catBarData.map((_, i) => (
-                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        <MonthlyComparison monthComparison={monthComparison} />
+        <SpendingBar catBarData={catBarData} />
       </div>
 
-      {/* Observations */}
-      <div className={`card ${styles.observationsCard}`}>
-        <h3 className={styles.chartTitle} style={{ marginBottom: 16 }}>
-          <Lightbulb
-            size={16}
-            style={{
-              display: "inline",
-              marginRight: 8,
-              color: "var(--accent-primary)",
-            }}
-          />
-          Smart Observations
-        </h3>
-        <div className={styles.obsList}>
-          {observations.map((obs, i) => (
-            <div key={i} className={`${styles.obsItem} ${styles[obs.type]}`}>
-              {obs.type === "positive" && (
-                <CheckCircle2 size={15} className={styles.obsIcon} />
-              )}
-              {obs.type === "warning" && (
-                <AlertCircle size={15} className={styles.obsIcon} />
-              )}
-              {obs.type === "neutral" && (
-                <Target size={15} className={styles.obsIcon} />
-              )}
-              {obs.type === "tip" && (
-                <Lightbulb size={15} className={styles.obsIcon} />
-              )}
-              <p className={styles.obsText}>{obs.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Best/Worst months */}
-      <div className={styles.monthRow}>
-        <div className={`card ${styles.monthCard} ${styles.monthBest}`}>
-          <span className={styles.monthBadge}>Best Month</span>
-          <div className={styles.monthName}>{bestMonth?.month}</div>
-          <div className={styles.monthStat}>
-            <span>Saved</span>
-            <span
-              className={styles.monthValue}
-              style={{ color: "var(--income-color)" }}
-            >
-              ₹
-              {(
-                (bestMonth?.income || 0) - (bestMonth?.expenses || 0)
-              ).toLocaleString("en-IN")}
-            </span>
-          </div>
-          <div className={styles.monthStat}>
-            <span>Income</span>
-            <span>₹{bestMonth?.income.toLocaleString("en-IN")}</span>
-          </div>
-          <div className={styles.monthStat}>
-            <span>Expenses</span>
-            <span>₹{bestMonth?.expenses.toLocaleString("en-IN")}</span>
-          </div>
-        </div>
-        <div className={`card ${styles.monthCard} ${styles.monthWorst}`}>
-          <span className={styles.monthBadge}>Lowest Savings</span>
-          <div className={styles.monthName}>{worstMonth?.month}</div>
-          <div className={styles.monthStat}>
-            <span>Saved</span>
-            <span
-              className={styles.monthValue}
-              style={{ color: "var(--expense-color)" }}
-            >
-              ₹
-              {(
-                (worstMonth?.income || 0) - (worstMonth?.expenses || 0)
-              ).toLocaleString("en-IN")}
-            </span>
-          </div>
-          <div className={styles.monthStat}>
-            <span>Income</span>
-            <span>₹{worstMonth?.income.toLocaleString("en-IN")}</span>
-          </div>
-          <div className={styles.monthStat}>
-            <span>Expenses</span>
-            <span>₹{worstMonth?.expenses.toLocaleString("en-IN")}</span>
-          </div>
-        </div>
-      </div>
+      <Observation observations={observations} />
+      <BestWorstMonth bestMonth={bestMonth} worstMonth={worstMonth} />
     </div>
   );
 }

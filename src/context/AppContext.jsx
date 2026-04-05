@@ -1,9 +1,10 @@
 import { createContext, useContext, useReducer, useEffect } from 'react';
-import { TRANSACTIONS, MONTHLY_DATA, BUDGET_GOALS } from '../data/mockData';
+import { USER, TRANSACTIONS, MONTHLY_DATA, BUDGET_GOALS } from '../data/mockData';
 
 const AppContext = createContext(null);
 
 const initialState = {
+  name: USER.name,
   role: 'admin', // 'admin' | 'viewer'
   transactions: TRANSACTIONS,
   monthlyData: MONTHLY_DATA,

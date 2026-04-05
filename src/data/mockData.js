@@ -1,3 +1,7 @@
+export const USER = {
+  name: 'Aman',
+}
+
 export const CATEGORIES = {
   salary: { label: 'Salary', color: '#2D6A4F', icon: '💼' },
   freelance: { label: 'Freelance', color: '#52796F', icon: '🖥️' },

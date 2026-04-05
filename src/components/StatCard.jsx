@@ -1,73 +1,89 @@
 import styles from "../stylesheets/components/StatCard.module.css";
-import { AreaChart, Area, ResponsiveContainer } from "recharts";
-import { MONTHLY_DATA } from "../data/mockData";
+import { LineChart, Line } from "recharts";
+import { ArrowUpRight, ArrowDownRight, Minus } from "lucide-react";
 
 function formatAmount(value) {
   if (value >= 100000) return `₹${(value / 100000).toFixed(2)}L`;
-  if (value >= 1000) return `₹${(value / 1000).toFixed(1)}K`;
+  if (value >= 1000)   return `₹${(value / 1000).toFixed(1)}K`;
   return `₹${value.toLocaleString("en-IN")}`;
 }
 
+/**
+ * StatCard — shared summary metric card.
+ *
+ * Props
+ * ─────
+ * label       {string}     Card heading, e.g. "Total Balance"
+ * value       {number}     Main metric value in ₹
+ * change      {number}     % change vs last period (optional)
+ * changeLabel {string}     Text next to %, default "vs last month"
+ * variant     {string}     "balance" | "income" | "expense" | "default"
+ * icon        {ReactNode}  Small icon, shown top-right
+ * sparkData   {number[]}   Raw number array → sparkline (optional)
+ * sparkColor  {string}     Sparkline stroke color (optional)
+ */
 export default function StatCard({
   label,
   value,
   change,
-  changeLabel,
+  changeLabel = "vs last month",
   variant = "default",
   icon,
+  sparkData,
+  sparkColor,
 }) {
-  const isPositive = change > 0;
-  const isNeutral = change === 0 || change === undefined;
+  const hasChange = change !== undefined && change !== null;
+  const isPositive = hasChange && change > 0;
+  const isNegative = hasChange && change < 0;
+
+  const chartData = sparkData ? sparkData.map((v, i) => ({ i, v })) : null;
 
   return (
-    <div className={`${styles.card} ${styles[variant]}`}>
-      <div>
-        <div className={styles.value}>{formatAmount(value)}</div>
-        <div className={styles.label}>{label}</div>
+    <div className={`${styles.card} ${styles[variant] || ""}`}>
+
+      {/* Top: label + icon */}
+      <div className={styles.top}>
+        <span className={styles.label}>{label}</span>
+        {icon && <div className={styles.iconWrap}>{icon}</div>}
       </div>
 
-      {change !== undefined && (
-        <div
-          className={`${styles.change} ${isPositive ? styles.positive : isNeutral ? styles.neutral : styles.negative}`}
-        >
-          <div>
-            <div className={styles.changeValue}>{change}%</div>
-            <div className={styles.changeLabel}>
-              {changeLabel || "vs last month"}
-            </div>
-          </div>
-          <ResponsiveContainer width="50%" height={50}>
-            <AreaChart
-              data={MONTHLY_DATA}
-              margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+      {/* Main value */}
+      <div className={styles.value}>{formatAmount(value)}</div>
+
+      {/* Bottom: change badge + sparkline */}
+      <div className={styles.bottom}>
+        {hasChange && (
+          <span className={`${styles.change} ${
+            isPositive ? styles.positive :
+            isNegative ? styles.negative :
+            styles.neutral
+          }`}>
+            {isPositive && <ArrowUpRight   size={12} />}
+            {isNegative && <ArrowDownRight size={12} />}
+            {!isPositive && !isNegative && <Minus size={12} />}
+            {Math.abs(change)}% {changeLabel}
+          </span>
+        )}
+
+        {chartData && (
+          <div className={styles.sparkWrap}>
+            <LineChart
+              width={100} height={38}
+              data={chartData}
+              margin={{ top:4, right:0, left:0, bottom:0 }}
             >
-              {label === "Total Income" ? (
-                <Area
-                  type="monotone"
-                  dataKey="income"
-                  name="Income"
-                  stroke="#2D6A4F"
-                  strokeWidth={2}
-                  fill="url(#incGrad)"
-                  dot={false}
-                  activeDot={{ r: 4, fill: "#2D6A4F" }}
-                />
-              ) : (
-                <Area
-                  type="monotone"
-                  dataKey="expenses"
-                  name="Expenses"
-                  stroke="#C0392B"
-                  strokeWidth={2}
-                  fill="url(#expGrad)"
-                  dot={false}
-                  activeDot={{ r: 4, fill: "#C0392B" }}
-                />
-              )}
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
-      )}
+              <Line
+                type="monotone"
+                dataKey="v"
+                stroke={sparkColor || "var(--income-color)"}
+                strokeWidth={1.8}
+                dot={false}
+                isAnimationActive={false}
+              />
+            </LineChart>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

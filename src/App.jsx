@@ -5,6 +5,7 @@ import Transactions from './pages/Transactions'
 import Income from './pages/Income'
 import Expenses from './pages/Expenses'
 import Insights from './pages/Insights'
+import NotFound from './pages/NotFound'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="income" element={<Income />} />
         <Route path="expenses" element={<Expenses />} />
         <Route path="insights" element={<Insights />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )

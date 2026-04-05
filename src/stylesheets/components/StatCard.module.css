@@ -1,91 +1,97 @@
 .card {
   background: var(--bg-surface);
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 18px 20px 14px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   box-shadow: var(--shadow-sm);
-  animation: fadeIn 0.35s ease forwards;
+  transition: box-shadow var(--transition), transform var(--transition);
+  animation: cardIn 0.3s ease both;
+  overflow: hidden;
 }
 
 .card:hover {
   box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
-.card.income {
-  background: #eafcea;
-}
-
-.card.expense {
-  background: #e9f4f6;
-}
-
+/* Variants */
 .card.balance {
-  background: #dff3f5;
-  color: var(--text-primary);
+  background: linear-gradient(140deg, var(--income-bg) 0%, var(--bg-surface) 100%);
+  border-color: rgba(45, 106, 79, 0.2);
+}
+
+/* Top row */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .label {
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
 }
 
 .iconWrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 30px;
   height: 30px;
   border-radius: var(--radius-sm);
   background: var(--bg-subtle);
+  display: grid;
+  place-items: center;
   color: var(--text-secondary);
 }
 
-.card.balance .iconWrap {
-  background: rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.7);
-}
+.card.balance .iconWrap { background: var(--income-bg);  color: var(--income-color);  }
+.card.income  .iconWrap { background: var(--income-bg);  color: var(--income-color);  }
+.card.expense .iconWrap { background: var(--expense-bg); color: var(--expense-color); }
 
+/* Main value */
 .value {
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 300;
-  letter-spacing: -0.8px;
+  letter-spacing: -1px;
   line-height: 1;
   font-family: var(--font-mono);
   color: var(--text-primary);
 }
 
-.change {
+/* Bottom */
+.bottom {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  gap: 4px;
-  font-size: 11.5px;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.change {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
   font-weight: 500;
-}
-
-.changeValue {
-  font-size: 16px;
-  color: var(--text-primary);
-}
-
-.changeLabel {
-  margin-top: -2px;
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--text-secondary);
-  letter-spacing: 0.06em;
+  line-height: 1;
 }
 
 .positive { color: var(--income-color); }
 .negative { color: var(--expense-color); }
-.neutral { color: var(--text-tertiary); }
+.neutral  { color: var(--text-tertiary); }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+.sparkWrap {
+  flex-shrink: 0;
+  opacity: 0.8;
+  margin-right: -8px;
+  margin-bottom: -6px;
+}
+
+@keyframes cardIn {
+  from { opacity:0; transform:translateY(6px); }
+  to   { opacity:1; transform:translateY(0); }
 }

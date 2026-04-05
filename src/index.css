@@ -1,6 +1,6 @@
-/* ===== Zorvyn DESIGN SYSTEM ===== */
-/* Aesthetic: Refined Editorial Finance — warm slate neutrals, amber accents */
-/* Inspired by: Bloomberg, Stripe Dashboard, Linear */
+/* ===== Finio DESIGN SYSTEM ===== */
+/* Aesthetic: Refined Editorial Finance — warm slate neutrals, green accents */
+/* Inspired by: Bloomberg, Stripe Dashboard, Linear, Xenith */
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mada:wght@200..900&display=swap');
 
@@ -15,23 +15,26 @@
   --text-primary: #1A1917;
   --text-secondary: #6B6860;
   --text-tertiary: #9C9A94;
-  --text-inverse: #F7F6F3;
-  --text-sidebar: #D4D2CB;
+  --text-inverse: #FFFFFF;
+  --text-sidebar: #3a3a3a;
 
   --border-default: #E5E3DC;
   --border-subtle: #EEEDE8;
   --border-strong: #C9C7BF;
 
-  --accent-primary: #0c1110;       /* Warm amber */
-  --accent-primary-hover: black;
-  --accent-primary-bg: #FDF3E7;
-  --accent-secondary: #2D6A4F;     /* Forest green */
+  /* Primary accent — deep forest green, professional */
+  --accent-primary: #1a3a2a;
+  --accent-primary-hover: #122a1e;
+  --accent-primary-bg: #eef5f1;
+  --accent-primary-text: #ffffff;
+
+  --accent-secondary: #2D6A4F;
   --accent-secondary-bg: #EEF5F1;
 
   --income-color: #2D6A4F;
   --income-bg: #EEF5F1;
   --expense-color: #C0392B;
-  --expense-bg: #f8e0e1;
+  --expense-bg: #fdf0ef;
 
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
@@ -56,22 +59,24 @@
   --bg-base: #111110;
   --bg-surface: #1C1C1A;
   --bg-elevated: #252522;
-  --bg-subtle: #1C1C1A;
+  --bg-subtle: #252522;
   --bg-sidebar: #0D0D0C;
 
   --text-primary: #EDECE8;
   --text-secondary: #A8A69F;
   --text-tertiary: #6E6C67;
-  --text-inverse: #F7F6F3;
-  --text-sidebar: #D4D2CB;
+  --text-inverse: #FFFFFF;
+  --text-sidebar: #C8C6BF;
 
   --border-default: #2E2D2A;
   --border-subtle: #252522;
   --border-strong: #403E3A;
 
-  --accent-primary: #0c1110;
-  --accent-primary-hover: #0c1110;
-  --accent-primary-bg: white;
+  /* Keep accent readable in dark */
+  --accent-primary: #3d8a65;
+  --accent-primary-hover: #2d6a4f;
+  --accent-primary-bg: #142419;
+  --accent-primary-text: #ffffff;
 
   --accent-secondary: #3D8A65;
   --accent-secondary-bg: #192820;
@@ -92,6 +97,10 @@
   padding: 0;
 }
 
+html, body {
+  height: 100%;
+}
+
 html {
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
@@ -107,7 +116,7 @@ body {
 }
 
 #root {
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Scrollbar */
@@ -117,19 +126,19 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
 
 /* Typography Scale */
-.text-xs { font-size: 11px; line-height: 16px; }
-.text-sm { font-size: 12px; line-height: 18px; }
-.text-base { font-size: 14px; line-height: 20px; }
-.text-lg { font-size: 16px; line-height: 24px; }
-.text-xl { font-size: 18px; line-height: 28px; }
+.text-xs  { font-size: 11px; line-height: 16px; }
+.text-sm  { font-size: 12px; line-height: 18px; }
+.text-base{ font-size: 14px; line-height: 20px; }
+.text-lg  { font-size: 16px; line-height: 24px; }
+.text-xl  { font-size: 18px; line-height: 28px; }
 .text-2xl { font-size: 22px; line-height: 30px; }
 .text-3xl { font-size: 28px; line-height: 36px; }
 
-.font-mono { font-family: var(--font-mono); }
-.font-medium { font-weight: 500; }
-.font-semibold { font-weight: 600; }
+.font-mono    { font-family: var(--font-mono); }
+.font-medium  { font-weight: 500; }
+.font-semibold{ font-weight: 600; }
 
-/* Utility classes */
+/* ===== CARD ===== */
 .card {
   background: var(--bg-surface);
   border: 1px solid var(--border-default);
@@ -137,6 +146,7 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
+/* ===== BADGE ===== */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -156,6 +166,7 @@ body {
   color: var(--expense-color);
 }
 
+/* ===== BUTTONS ===== */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -169,57 +180,67 @@ body {
   border: none;
   transition: var(--transition);
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .btn-primary {
   background: var(--accent-primary);
-  color: #fff;
+  color: var(--accent-primary-text);
 }
-.btn-primary:hover { background: var(--accent-primary-hover); }
+.btn-primary:hover {
+  background: var(--accent-primary-hover);
+  color: var(--accent-primary-text);
+}
 
 .btn-secondary {
   background: var(--bg-subtle);
   color: var(--text-primary);
   border: 1px solid var(--border-default);
 }
-.btn-secondary:hover { background: var(--border-subtle); }
+.btn-secondary:hover {
+  background: var(--border-default);
+  color: var(--text-primary);
+}
 
 .btn-ghost {
   background: transparent;
   color: var(--text-secondary);
 }
-.btn-ghost:hover { background: var(--bg-subtle); color: var(--text-primary); }
+.btn-ghost:hover {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+}
 
-/* Animations */
+/* ===== ANIMATIONS ===== */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(-12px); }
-  to { opacity: 1; transform: translateX(0); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50%       { opacity: 0.5; }
 }
 
-.animate-fade { animation: fadeIn 0.3s ease forwards; }
+.animate-fade  { animation: fadeIn  0.3s  ease forwards; }
 .animate-slide { animation: slideIn 0.25s ease forwards; }
 
-/* Stagger for lists */
-.stagger > *:nth-child(1) { animation-delay: 0ms; }
-.stagger > *:nth-child(2) { animation-delay: 40ms; }
-.stagger > *:nth-child(3) { animation-delay: 80ms; }
+/* Stagger helpers */
+.stagger > *:nth-child(1) { animation-delay:   0ms; }
+.stagger > *:nth-child(2) { animation-delay:  40ms; }
+.stagger > *:nth-child(3) { animation-delay:  80ms; }
 .stagger > *:nth-child(4) { animation-delay: 120ms; }
 .stagger > *:nth-child(5) { animation-delay: 160ms; }
 .stagger > *:nth-child(6) { animation-delay: 200ms; }
 
-/* Number styling */
+/* Amount helpers */
 .amount-positive { color: var(--income-color); }
 .amount-negative { color: var(--expense-color); }
 
-/* Responsive */
+/* Responsive sidebar collapse */
 @media (max-width: 768px) {
   :root { --sidebar-width: 0px; }
 }
