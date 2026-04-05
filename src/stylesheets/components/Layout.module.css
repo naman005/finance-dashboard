@@ -19,7 +19,7 @@
   top: 0;
   height: 100dvh;
   overflow: hidden;
-  z-index: 60;
+  z-index: 200;
   transition: transform var(--transition-slow);
   flex-shrink: 0;
 }
@@ -266,10 +266,11 @@
   height: 52px;
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border-default);
-  flex-shrink: 0;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 40;
+  left: 0;
+  right: 0;
+  z-index: 100;
 }
 
 .hamburger {
@@ -347,7 +348,8 @@
     position: fixed;
     left: 0;
     top: 0;
-    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
     transform: translateX(-100%);
     box-shadow: var(--shadow-lg);
     /* Keep the width on mobile too */
@@ -374,14 +376,34 @@
     display: block;
   }
 
+  .main {
+    /* This pushes the entire dashboard content down so it's not hidden */
+    padding-top: 52px;
+
+    /* Ensure the main container doesn't try to scroll internally
+       if you want the whole page to scroll naturally */
+    overflow: visible;
+  }
+
   .content {
+    /* Adjust padding if it feels too tight on mobile */
     padding: 16px;
+    min-height: calc(100dvh - 52px);
+  }
+
+  .mobileBar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 52px;
+    z-index: 100; /* High z-index to stay above everything */
   }
 }
-
-/* Desktop: hide mobile bar entirely */
 @media (min-width: 901px) {
-  .mobileBar {
-    display: none;
+  .main {
+    padding-top: 0; /* Reset for desktop where sidebar is on the left */
   }
 }

@@ -1,5 +1,5 @@
 export const USER = {
-  name: 'Aman',
+  name: 'Naman',
 }
 
 export const CATEGORIES = {

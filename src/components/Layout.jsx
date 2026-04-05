@@ -1,5 +1,5 @@
-import { useState, useCallback } from "react";
-import { Outlet, NavLink, useLocation } from "react-router-dom";
+import { useState, useCallback, useEffect } from "react";
+import { Outlet, NavLink } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import {
   LayoutDashboard,
@@ -17,6 +17,7 @@ import {
   Minimize2,
 } from "lucide-react";
 import styles from "../stylesheets/components/Layout.module.css";
+import { USER } from "../data/mockData";
 
 const NAV_ITEMS = [
   { path: "/dashboard",    label: "Dashboard",    icon: LayoutDashboard },
@@ -30,9 +31,7 @@ export default function Layout() {
   const { state, dispatch } = useApp();
   const [mobileOpen, setMobileOpen]   = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const location = useLocation();
 
-  // Fullscreen toggle
   const toggleFullscreen = useCallback(() => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen?.();
@@ -42,6 +41,16 @@ export default function Layout() {
       setIsFullscreen(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    }
+  }, [mobileOpen]);
 
   const closeSidebar = () => setMobileOpen(false);
 
@@ -110,7 +119,7 @@ export default function Layout() {
             <div className={styles.userCard}>
               <div className={styles.userAvatar}>N</div>
               <div className={styles.userInfo}>
-                <span className={styles.userName}>Naman C.</span>
+                <span className={styles.userName}>{USER.name}</span>
                 <span className={styles.userRole}>
                   {state.role === "admin" ? "Administrator" : "Viewer"}
                 </span>
@@ -122,7 +131,7 @@ export default function Layout() {
 
       {/* Backdrop overlay (mobile only) */}
       {mobileOpen && (
-        <div className={styles.backdrop} onClick={closeSidebar} />
+        <div className={`${styles.backdrop} ${mobileOpen ? styles.active : ""}`} onClick={closeSidebar} />
       )}
 
       {/* ── MAIN AREA ── */}

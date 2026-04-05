@@ -59,14 +59,23 @@ export default function Dashboard() {
     lastExp > 0 ? Math.round(((thisExp - lastExp) / lastExp) * 100) : -8;
   const savingsRate =
     income > 0 ? Math.round(((income - expenses) / income) * 100) : 0;
+  const latestDate = state.transactions.length
+  ? new Date(
+      Math.max(...state.transactions.map(t => new Date(t.date)))
+    )
+  : new Date();
+  const monthLabel = latestDate.toLocaleDateString("en-IN", {
+    month: "long",
+    year: "numeric",
+  });
 
   return (
     <div className={styles.page}>
       <div className={styles.pageHeader}>
         <div>
-          <h2 className={styles.greeting}>Welcome Back, {USER.name}!</h2>
+          <h2 className={styles.greeting}>Welcome Back,&nbsp;{USER.name}!</h2>
           <p className={styles.subtext}>
-            Here's your financial summary for March 2026
+            Here's your financial summary for {monthLabel}
           </p>
         </div>
 

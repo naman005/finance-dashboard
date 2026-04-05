@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { useState } from "react";
 import { X, Plus } from "lucide-react";
 import { useApp } from "../context/AppContext";
@@ -19,6 +20,7 @@ export default function AddTransactionModal({ onClose, defaultType }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setError("");
     if (!form.description.trim()) return setError("Description is required");
     if (!form.amount || Number(form.amount) <= 0) return setError("Enter a valid amount");
 
@@ -37,7 +39,7 @@ export default function AddTransactionModal({ onClose, defaultType }) {
   // Show ALL categories regardless of type — user should pick freely
   const categoryEntries = Object.entries(CATEGORIES);
 
-  return (
+  return createPortal(
     <div className={styles.overlay} onClick={e => e.target === e.currentTarget && onClose()}>
       <div className={styles.modal}>
 
@@ -143,6 +145,6 @@ export default function AddTransactionModal({ onClose, defaultType }) {
           </div>
         </form>
       </div>
-    </div>
+    </div>, document.body
   );
 }
