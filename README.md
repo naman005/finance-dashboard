@@ -1,6 +1,6 @@
-# Finio — Finance Dashboard
+# Zorvyn - Finance Dashboard
 
-A clean, interactive finance dashboard for tracking income, expenses, and spending patterns. Built with React + Vite as a frontend internship assignment submission.
+A clean, interactive finance dashboard for tracking income, expenses, and spending patterns. Built with React + Vite as a frontend internship take home assignment submission.
 
 ---
 
@@ -56,11 +56,11 @@ npm run preview    # preview production build
 Switch roles via the **Admin / Viewer** button in the dashboard header or the sidebar toggle.
 
 ### Other
-- **Dark mode** — persists across sessions via `localStorage`
-- **Data persistence** — transactions and preferences saved locally
-- **Custom categories** — Add modal lets you type a new category if none fit
-- **404 page** — clean not-found page with back navigation
-- **Fully responsive** — sidebar collapses to hamburger on mobile; table columns progressively hide
+- **Dark mode** - persists across sessions via `localStorage`
+- **Data persistence** - transactions and preferences saved locally
+- **Custom categories** - Add modal lets you type a new category if none fit
+- **404 page** - clean not-found page with back navigation
+- **Fully responsive** - sidebar collapses to hamburger on mobile; table columns progressively hide
 
 ---
 
@@ -83,28 +83,20 @@ Switch roles via the **Admin / Viewer** button in the dashboard header or the si
 ```
 src/
 ├── components/          # Shared UI (StatCard, TransactionRow, Layout, Modal)
-├── context/             # AppContext — global state + useFilteredTransactions hook
-├── data/                # mockData.js — transactions, categories, monthly data
+├── context/             # AppContext - global state + useFilteredTransactions hook
+├── data/                # mockData.js - transactions, categories, monthly data
 ├── pages/               # Dashboard, Transactions, Income, Expenses, Insights, 404
 └── stylesheets/         # CSS Modules (co-located by component/page)
+└── utils/               # Helper functions for date and amount
 ```
 
 ---
 
 ## State Management
 
-Single `AppContext` using `useReducer`. All mutations — add, edit, delete transactions, role switch, theme toggle — go through the reducer. `useFilteredTransactions` is a derived hook that applies search/filter/sort logic without extra re-renders. No external library needed at this scale.
+Single `AppContext` using `useReducer`. All mutations - add, edit, delete transactions, role switch, theme toggle - go through the reducer. `useFilteredTransactions` is a derived hook that applies search/filter/sort logic without extra re-renders. No external library needed at this scale.
 
 ---
 
-## Design Decisions
 
-- **Color palette:** Warm slate neutrals + deep forest green accent — deliberately avoiding generic "AI dashboard" blue/purple palettes
-- **Typography:** Mada (UI) + Fira Sans (numbers) — editorial, readable
-- **Sparklines** in stat cards give instant trend context without opening a chart
-- **Sidebar** is a sticky drawer on desktop, slides in from left on mobile
-- **Table layout** for transactions — columns align under headers, actions reveal on hover
-
----
-
-*Submitted for Zorvyn Frontend Internship — April 2026*
+*Submitted for Zorvyn Frontend Internship - April 2026*
